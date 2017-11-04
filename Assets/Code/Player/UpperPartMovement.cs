@@ -6,6 +6,7 @@ public class UpperPartMovement : MonoBehaviour
 {
     public Transform AimPoint;
     public float TurnSpeed;
+    public float AimTolerance;
 
     public void Move()
     {
@@ -15,11 +16,11 @@ public class UpperPartMovement : MonoBehaviour
     void Turn()
     {
         var transformedPos = this.transform.InverseTransformPoint(AimPoint.position);
-        if (transformedPos.x > 0)
+        if (transformedPos.x > AimTolerance)
         {
             this.transform.Rotate(Vector3.up * TurnSpeed);
         }
-        else
+        else if (transformedPos.x < -AimTolerance)
         {
             this.transform.Rotate(Vector3.up * -TurnSpeed);
         }
