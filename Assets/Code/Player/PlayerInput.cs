@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerInput : MonoBehaviour
     private string UpperVertical;
     private string PrimaryFire;
     private string SecondaryFire;
+    private string Triggers;
 
     // Use this for initialization
     void Start ()
@@ -32,6 +34,7 @@ public class PlayerInput : MonoBehaviour
         UpperVertical = "UpperV_P" + bot.PlayerId;
         PrimaryFire = "PFire_P" + bot.PlayerId;
         SecondaryFire = "SFire_P" + bot.PlayerId;
+        Triggers = "Triggers_P" + bot.PlayerId;
     }
 	
 	// Update is called once per frame
@@ -53,7 +56,14 @@ public class PlayerInput : MonoBehaviour
 
 	    if (Input.GetButton(PrimaryFire))
 	    {
-	        bot.PrimaryWeapon.Fire();
+	        bot.Weapons.PrimaryWeapon.Fire();
 	    }
-    }
+
+	    var tAxis = Input.GetAxis(Triggers);
+
+	    if (tAxis <= -0.9f)
+	    {
+	        lowerMover.DashForward();
+	    }
+	}
 }

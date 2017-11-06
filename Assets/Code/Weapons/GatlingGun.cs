@@ -64,8 +64,8 @@ public class GatlingGun : WeaponBase
     {
         if (hit.collider.tag.Equals("Physical"))
         {
-            var body = hit.collider.GetComponent<Rigidbody>();
-            var pushVector = body.transform.position + Vector3.Lerp(hit.point, body.transform.position, 1);
+            var body = hit.collider.GetComponentInParent<Rigidbody>();
+            var pushVector = this.transform.forward;
             body.AddForce(pushVector * Stats.PushForce);
         }
     }

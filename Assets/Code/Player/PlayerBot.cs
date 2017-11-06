@@ -10,8 +10,7 @@ public class PlayerBot : MonoBehaviour
     public int CurrentHealth;
     public LowerPartMovement LowerController;
     public UpperPartMovement UpperController;
-    public WeaponBase PrimaryWeapon;
-    public WeaponBase SecondaryWeapon;
+    [HideInInspector] public WeaponSystem Weapons;
 
     void Start()
     {
@@ -19,5 +18,6 @@ public class PlayerBot : MonoBehaviour
         LowerController.RollSpeed = Stats.SpeedScore;
         LowerController.TurnSpeed = Stats.TurnScore;
         UpperController.TurnSpeed = Stats.TurretRotateScore;
+        Weapons = this.GetComponentInChildren<WeaponSystem>();
     }
 }

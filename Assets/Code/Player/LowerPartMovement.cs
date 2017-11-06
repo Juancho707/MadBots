@@ -7,21 +7,46 @@ public class LowerPartMovement : MonoBehaviour
     public Transform AimPoint;
     public float TurnSpeed;
     public float RollSpeed;
+    public float DashForce;
+    public float DashDuration;
+    public float TopSpeed;
 
-    private Rigidbody myBody;
+    protected float dashElapsed;
+    protected Rigidbody myBody;
 
-    void Start()
+    protected void Start()
     {
         myBody = this.GetComponent<Rigidbody>();
     }
 
-    public void Move()
+    protected virtual void FixedUpdate()
+    {
+        if (dashElapsed > 0)
+        {
+            dashElapsed -= Time.fixedDeltaTime;
+            myBody.AddForce(this.transform.forward * DashForce);
+        }
+        else
+        {
+            if (myBody.velocity.magnitude > TopSpeed)
+            {
+                myBody.AddForce(-myBody.velocity.normalized * 900);
+            }
+        }
+    }
+
+    public virtual void Move()
     {
         myBody.AddForce(this.transform.forward * RollSpeed);
         Turn();
     }
 
-    void Turn()
+    public void DashForward()
+    {
+        dashElapsed = DashDuration;
+    }
+
+    protected void Turn()
     {
         var transformedPos = this.transform.InverseTransformPoint(AimPoint.position);
         if (transformedPos.x > 0)
