@@ -10,8 +10,12 @@ public class LowerPartMovement : MonoBehaviour
     public float DashForce;
     public float DashDuration;
     public float TopSpeed;
+    public float DashCooldown;
+    public float velocity;
 
+    protected bool dashIsCoolingDown;
     protected float dashElapsed;
+    protected float dashCooldownElapsed;
     protected Rigidbody myBody;
 
     protected void Start()
@@ -21,16 +25,33 @@ public class LowerPartMovement : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        velocity = myBody.velocity.magnitude;
+
+        if (dashIsCoolingDown)
+        {
+            dashCooldownElapsed -= Time.fixedDeltaTime;
+            if (dashCooldownElapsed < 0)
+            {
+                dashIsCoolingDown = false;
+            }
+        }
         if (dashElapsed > 0)
         {
             dashElapsed -= Time.fixedDeltaTime;
             myBody.AddForce(this.transform.forward * DashForce);
+            if (dashElapsed < 0)
+            {
+                dashIsCoolingDown = true;
+                dashCooldownElapsed = DashCooldown;
+            }
         }
         else
         {
-            if (myBody.velocity.magnitude > TopSpeed)
             {
-                myBody.AddForce(-myBody.velocity.normalized * 900);
+                if (myBody.velocity.magnitude > TopSpeed)
+                {
+                    myBody.AddForce(-myBody.velocity.normalized * 900);
+                }
             }
         }
     }
@@ -43,7 +64,12 @@ public class LowerPartMovement : MonoBehaviour
 
     public void DashForward()
     {
-        dashElapsed = DashDuration;
+        if (!dashIsCoolingDown)
+        {
+            dashElapsed = DashDuration;
+            dashIsCoolingDown = true;
+            dashCooldownElapsed = DashCooldown;
+        }
     }
 
     protected void Turn()

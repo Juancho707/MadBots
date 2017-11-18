@@ -22,6 +22,9 @@ public class PlayerInput : MonoBehaviour
     private string SecondaryFire;
     private string Triggers;
 
+    private float inputDisableElapsed;
+    private bool inputIsDisabled;
+
     // Use this for initialization
     void Start ()
     {
@@ -38,32 +41,54 @@ public class PlayerInput : MonoBehaviour
     }
 	
 	// Update is called once per frame
-	void FixedUpdate ()
-	{
-	    var lAxis = new Vector2(Input.GetAxis(LowerHorizontal), Input.GetAxis(LowerVertical));
-	    if (lAxis.magnitude > DeadZone)
-	    {
-	        LowerAimPoint.position = this.transform.position + new Vector3(lAxis.x, 0f, lAxis.y) * SeparationFactor;
-            lowerMover.Move();
-	    }
+    void FixedUpdate()
+    {
+        if (!inputIsDisabled)
+        {
 
-        var uAxis = new Vector2(Input.GetAxis(UpperHorizontal), Input.GetAxis(UpperVertical));
-	    if (uAxis.magnitude > DeadZone)
-	    {
-	        UpperAimPoint.position = this.transform.position + new Vector3(uAxis.x, 0f, uAxis.y) * SeparationFactor;
-            UpperMover.Move();
-	    }
+            var lAxis = new Vector2(Input.GetAxis(LowerHorizontal), Input.GetAxis(LowerVertical));
+            if (lAxis.magnitude > DeadZone)
+            {
+                LowerAimPoint.position = this.transform.position + new Vector3(lAxis.x, 0f, lAxis.y) * SeparationFactor;
+                lowerMover.Move();
+            }
 
-	    if (Input.GetButton(PrimaryFire))
-	    {
-	        bot.Weapons.PrimaryWeapon.Fire();
-	    }
+            var uAxis = new Vector2(Input.GetAxis(UpperHorizontal), Input.GetAxis(UpperVertical));
+            if (uAxis.magnitude > DeadZone)
+            {
+                UpperAimPoint.position = this.transform.position + new Vector3(uAxis.x, 0f, uAxis.y) * SeparationFactor;
+                UpperMover.Move();
+            }
 
-	    var tAxis = Input.GetAxis(Triggers);
+            if (Input.GetButton(PrimaryFire))
+            {
+                foreach (var w in bot.Weapons.PrimaryWeapon)
+                {
+                        w.Fire();
+                }
+                
+            }
 
-	    if (tAxis <= -0.9f)
-	    {
-	        lowerMover.DashForward();
-	    }
-	}
+            var tAxis = Input.GetAxis(Triggers);
+
+            if (tAxis <= -0.9f)
+            {
+                lowerMover.DashForward();
+            }
+        }
+        else
+        {
+            inputDisableElapsed -= Time.fixedDeltaTime;
+            if (inputDisableElapsed < 0)
+            {
+                inputIsDisabled = false;
+            }
+        }
+    }
+
+    public void DisableInputFor(float duration)
+    {
+        inputDisableElapsed = duration;
+        inputIsDisabled = true;
+    }
 }
