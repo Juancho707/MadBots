@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 94f59c8c1945774439cddcd2e3b4161f
-timeCreated: 1511020540
+guid: 8f32de0ff96de2b4ea0deb9b9f1a984c
+timeCreated: 1512930714
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -9,24 +9,18 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: RocketLauncher002
-    9500000: //RootNode
+    4300000: Mine State 2
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: 14 - Defaultdd
-    second: {fileID: 2100000, guid: b39163f6ae71b284998799d5e0f7e8d7, type: 2}
+      name: 08 - Default
+    second: {fileID: 2100000, guid: a1a3a80382a527e4d8657202dfef8836, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: 15 - Default
-    second: {fileID: 2100000, guid: 3f7acdebe35373c4c8416ed5e1621982, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 'Material #62'
-    second: {fileID: 2100000, guid: a4c57f6d047154d4684727e69def6523, type: 2}
+      name: 'Material #1'
+    second: {fileID: 2100000, guid: 756e14215f66e88418929024d848e58c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -98,7 +92,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerBot : MonoBehaviour
 {
+    public Nationality Country;
     public BotData Stats;
     public int PlayerId;
     public int CurrentHealth;
@@ -18,6 +19,17 @@ public class PlayerBot : MonoBehaviour
         LowerController.RollSpeed = Stats.SpeedScore;
         LowerController.TurnSpeed = Stats.TurnScore;
         UpperController.TurnSpeed = Stats.TurretRotateScore;
+    }
+
+    public void LoadPrimary(GameObject weapon)
+    {
         Weapons = this.GetComponentInChildren<WeaponSystem>();
+        Weapons.LoadPrimary(weapon);
+    }
+
+    public void LoadSecondary(GameObject weapon)
+    {
+        Weapons = this.GetComponentInChildren<WeaponSystem>();
+        Weapons.LoadSecondary(weapon);
     }
 }

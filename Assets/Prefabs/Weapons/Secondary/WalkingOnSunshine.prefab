@@ -74,6 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4950284845184312}
   - component: {fileID: 114816378588548464}
+  - component: {fileID: 114149334312449262}
   m_Layer: 0
   m_Name: WalkingOnSunshine
   m_TagString: Untagged
@@ -404,6 +405,24 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114149334312449262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1512683278139658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6fbadafa1f8478d9db15dc1ea5e0c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponType: 0
+  Stats:
+    Damage: 0
+    PushForce: 0
+    RateOfFire: 0
+    Accuracy: 0
+    Range: 0
 --- !u!114 &114816378588548464
 MonoBehaviour:
   m_ObjectHideFlags: 1

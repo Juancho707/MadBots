@@ -5,15 +5,31 @@ using UnityEngine;
 
 public class WeaponSystem : MonoBehaviour
 {
-    [HideInInspector] public WeaponBase[] PrimaryWeapon;
-    [HideInInspector] public WeaponBase[] SecondaryWeapon;
+    [HideInInspector] public PrimaryWeaponBase[] PrimaryWeapon;
+    [HideInInspector] public SecondaryWeaponBase[] SecondaryWeapon;
 
-    public Transform PrimaryWeaponSpot;
-    public Transform SecondaryWeaponSpot;
-
-    void Start()
+    public Transform[] PrimaryWeaponSpots;
+    public Transform[] SecondaryWeaponSpots;
+    
+    public void LoadPrimary(GameObject weapon)
     {
-        PrimaryWeapon = PrimaryWeaponSpot.GetComponentsInChildren<WeaponBase>();
-        SecondaryWeapon = SecondaryWeaponSpot.GetComponentsInChildren<WeaponBase>();
+        foreach (var s in PrimaryWeaponSpots)
+        {
+            var weap = Instantiate(weapon, s);
+            weap.transform.localPosition = Vector3.zero;
+        }
+
+        PrimaryWeapon = this.GetComponentsInChildren<PrimaryWeaponBase>();
+    }
+
+    public void LoadSecondary(GameObject weapon)
+    {
+        foreach (var s in SecondaryWeaponSpots)
+        {
+            var weap = Instantiate(weapon, s);
+            weap.transform.localPosition = Vector3.zero;
+        }
+
+        SecondaryWeapon = this.GetComponentsInChildren<SecondaryWeaponBase>();
     }
 }

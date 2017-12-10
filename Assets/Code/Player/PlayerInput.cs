@@ -56,7 +56,7 @@ public class PlayerInput : MonoBehaviour
             var uAxis = new Vector2(Input.GetAxis(UpperHorizontal), Input.GetAxis(UpperVertical));
             if (uAxis.magnitude > DeadZone)
             {
-                UpperAimPoint.position = this.transform.position + new Vector3(uAxis.x, 0f, uAxis.y) * SeparationFactor;
+                UpperAimPoint.position = UpperMover.transform.position + new Vector3(uAxis.x, 0f, uAxis.y) * SeparationFactor;
                 UpperMover.Move();
             }
 

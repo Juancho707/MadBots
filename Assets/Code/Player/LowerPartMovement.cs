@@ -5,13 +5,12 @@ using UnityEngine;
 public class LowerPartMovement : MonoBehaviour
 {
     public Transform AimPoint;
-    public float TurnSpeed;
-    public float RollSpeed;
+    [HideInInspector]public float TurnSpeed;
+    [HideInInspector] public float RollSpeed;
     public float DashForce;
     public float DashDuration;
     public float TopSpeed;
     public float DashCooldown;
-    public float velocity;
 
     protected bool dashIsCoolingDown;
     protected float dashElapsed;
@@ -25,8 +24,6 @@ public class LowerPartMovement : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        velocity = myBody.velocity.magnitude;
-
         if (dashIsCoolingDown)
         {
             dashCooldownElapsed -= Time.fixedDeltaTime;
@@ -74,14 +71,20 @@ public class LowerPartMovement : MonoBehaviour
 
     protected void Turn()
     {
-        var transformedPos = this.transform.InverseTransformPoint(AimPoint.position);
-        if (transformedPos.x > 0)
-        {
-            myBody.AddTorque(Vector3.up * TurnSpeed);
-        }
-        else
-        {
-            myBody.AddTorque(Vector3.up * -TurnSpeed);
-        }
+        this.transform.LookAt(AimPoint);
+        //var rot = this.transform.eulerAngles;
+        //rot.y = 0;
+        //this.transform.eulerAngles = rot;
+
+
+        //var transformedPos = this.transform.InverseTransformPoint(AimPoint.position);
+        //if (transformedPos.x > 0)
+        //{
+        //    myBody.AddTorque(Vector3.up * TurnSpeed);
+        //}
+        //else
+        //{
+        //    myBody.AddTorque(Vector3.up * -TurnSpeed);
+        //}
     }
 }

@@ -16,8 +16,6 @@ public class LowerBallMovement : LowerPartMovement
 
     protected override void FixedUpdate()
     {
-        velocity = myBody.velocity.magnitude;
-
         if (dashIsCoolingDown)
         {
             dashCooldownElapsed -= Time.fixedDeltaTime;

@@ -15,14 +15,19 @@ public class UpperPartMovement : MonoBehaviour
 
     void Turn()
     {
-        var transformedPos = this.transform.InverseTransformPoint(AimPoint.position);
-        if (transformedPos.x > AimTolerance)
-        {
-            this.transform.Rotate(Vector3.up * TurnSpeed);
-        }
-        else if (transformedPos.x < -AimTolerance)
-        {
-            this.transform.Rotate(Vector3.up * -TurnSpeed);
-        }
+        this.transform.LookAt(AimPoint);
+        //var rot = this.transform.eulerAngles;
+        //rot.y = 0;
+        //this.transform.eulerAngles = rot;
+
+        //var transformedPos = this.transform.InverseTransformPoint(AimPoint.position);
+        //if (transformedPos.x > AimTolerance)
+        //{
+        //    this.transform.Rotate(Vector3.up * TurnSpeed);
+        //}
+        //else if (transformedPos.x < -AimTolerance)
+        //{
+        //    this.transform.Rotate(Vector3.up * -TurnSpeed);
+        //}
     }
 }

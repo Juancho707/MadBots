@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GatlingGun : WeaponBase
+public class GatlingGun : PrimaryWeaponBase
 {
     public Rotator BarrelRotator;
     public ParticleSystem Muzzle;
@@ -8,8 +8,6 @@ public class GatlingGun : WeaponBase
 
     public GameObject ShotHitPf;
     public GameObject ShotLinePf;
-
-    private float fireElapsed;
 
     void Start()
     {
